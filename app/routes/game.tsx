@@ -11,7 +11,7 @@ import { generateMathQuestion } from "../lib/questions/generator";
 import { setHighScore } from "@/lib/highscore";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "MathMix" }, { name: "MathMix", content: "MathMix" }];
+  return [{ title: "MathMix - GAME" }, { name: "MathMix", content: "MathMix" }];
 }
 
 export default function Game() {

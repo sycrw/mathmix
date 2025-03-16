@@ -13,7 +13,7 @@ import { getHighScore } from "@/lib/highscore";
 import { secondsToTime } from "@/lib/secondsToTime";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "MathMix" }, { name: "MathMix", content: "MathMix" }];
+  return [{ title: "MathMix - END" }, { name: "MathMix", content: "MathMix" }];
 }
 
 export default function Game() {

@@ -6,10 +6,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 
 export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
+  return [{ title: "MathMix" }, { name: "MathMix", content: "MathMix" }];
 }
 
 export default function Home() {
