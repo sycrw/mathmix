@@ -5,18 +5,22 @@ interface OptionsSelectProps {
   difficulty: number;
   length: number;
   operations: Array<Operation>;
+  withNegative: boolean;
   setDifficulty: (difficulty: number) => void;
   setLength: (length: number) => void;
   setOperations: (operations: Array<Operation>) => void;
+  setWithNegative: (withNegative: boolean) => void;
 }
 
 export const OptionsSelect = ({
   difficulty,
   length,
   operations,
+  withNegative,
   setDifficulty,
   setLength,
   setOperations,
+  setWithNegative,
 }: OptionsSelectProps) => {
   const POSSIBLE_LENGTHS = [15, 30, 60, 90];
   const POSSIBLE_OPERATIONS = [
@@ -82,6 +86,14 @@ export const OptionsSelect = ({
               {l}
             </button>
           ))}
+        </div>
+        <div className="w-full mt-3">
+          <button
+            className={`btn w-full ${withNegative && "btn-primary"}`}
+            onClick={() => setWithNegative(!withNegative)}
+          >
+            With Negative Numbers
+          </button>
         </div>
       </div>
     </>

@@ -1,10 +1,12 @@
+import type { M } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
 import type { Operation } from "@/types/operation";
 import type { Question } from "@/types/question";
 
 export const generateMathQuestion = (
   length: number,
   difficulty: number,
-  operations: Array<Operation>
+  operations: Array<Operation>,
+  withNegative: boolean
 ): Array<Question> => {
   const difficultyMultiplier = 10 ** difficulty;
 
@@ -20,19 +22,19 @@ export const generateMathQuestion = (
       //check that a whole number is the answer
       second =
         (Math.floor(Math.random() * difficultyMultiplier) + 1) *
-        (Math.random() > 0.5 ? 1 : -1);
+        (!withNegative ? 1 : Math.random() > 0.5 ? 1 : -1);
       first =
         Math.floor(Math.random() * difficultyMultiplier) *
         second *
-        (Math.random() > 0.5 ? 1 : -1);
+        (!withNegative ? 1 : Math.random() > 0.5 ? 1 : -1);
       answer = first / second;
     } else {
       first =
         Math.floor(Math.random() * difficultyMultiplier) *
-        (Math.random() > 0.5 ? 1 : -1);
+        (!withNegative ? 1 : Math.random() > 0.5 ? 1 : -1);
       second =
         Math.floor(Math.random() * difficultyMultiplier) *
-        (Math.random() > 0.5 ? 1 : -1);
+        (!withNegative ? 1 : Math.random() > 0.5 ? 1 : -1);
 
       switch (operation) {
         case "add":

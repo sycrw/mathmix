@@ -22,6 +22,7 @@ export default function Game() {
   const difficulty = Number(searchParams.get("difficulty"));
   const operations = (searchParams.get("operations")?.split(",") ||
     []) as Operation[];
+  const withNegative = searchParams.get("withNegative") === "true";
   const time = Number(searchParams.get("time"));
   const navigate = useNavigate();
 
@@ -44,10 +45,12 @@ export default function Game() {
           </div>
           <div className="stat-title">High Score</div>
           <div className="stat-value text-secondary">
-            {getHighScore(operations, difficulty, length)} s
+            {getHighScore(operations, difficulty, length, withNegative)} s
           </div>
           <div className="stat-desc">
-            {secondsToTime(getHighScore(operations, difficulty, length))}
+            {secondsToTime(
+              getHighScore(operations, difficulty, length, withNegative)
+            )}
           </div>
         </div>
       </div>

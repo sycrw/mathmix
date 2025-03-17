@@ -20,6 +20,7 @@ export default function Game() {
   const difficulty = Number(searchParams.get("difficulty"));
   const operations = (searchParams.get("operations")?.split(",") ||
     []) as Operation[];
+  const withNegative = searchParams.get("withNegative") === "true";
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
@@ -49,13 +50,18 @@ export default function Game() {
   }, []);
 
   useEffect(() => {
-    const questions = generateMathQuestion(length, difficulty, operations);
+    const questions = generateMathQuestion(
+      length,
+      difficulty,
+      operations,
+      withNegative
+    );
     setQuestions(questions);
   }, []);
 
   function handleEndGame() {
     console.log("end game");
-    setHighScore(operations, difficulty, length, time);
+    setHighScore(operations, difficulty, length, withNegative, time);
 
     const searchParams = new URLSearchParams();
     searchParams.set("difficulty", difficulty.toString());

@@ -15,10 +15,16 @@ export const HighscoreModal = () => {
   const [difficulty, setDifficulty] = useState<number>(0);
   const [length, setLength] = useState<number>(15);
   const [highscore, setHighscore] = useState<number | undefined>(undefined);
+  const [withNegative, setWithNegative] = useState<boolean>(false);
   const [noHighscore, setNoHighscore] = useState<boolean>(false);
 
   const handleGetHighscore = () => {
-    const highscore = getHighScore(operations, difficulty / 25 + 1, length);
+    const highscore = getHighScore(
+      operations,
+      difficulty / 25 + 1,
+      length,
+      withNegative
+    );
     if (highscore) {
       setHighscore(highscore);
       setNoHighscore(false);
@@ -46,9 +52,11 @@ export const HighscoreModal = () => {
             difficulty={difficulty}
             length={length}
             operations={operations}
+            withNegative={withNegative}
             setDifficulty={setDifficulty}
             setLength={setLength}
             setOperations={setOperations}
+            setWithNegative={setWithNegative}
           />
           <button
             className="btn btn-secondary w-full mt-3 "

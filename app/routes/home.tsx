@@ -15,10 +15,8 @@ export default function Home() {
   const [length, setLength] = useState<number>(15);
   const [operations, setOperations] = useState<Array<Operation>>([
     Operation.Add,
-    Operation.Subtract,
-    Operation.Multiply,
-    Operation.Divide,
   ]);
+  const [withNegative, setWithNegative] = useState<boolean>(false);
 
   const startGame = () => {
     const searchParams = new URLSearchParams();
@@ -27,6 +25,7 @@ export default function Home() {
     searchParams.set("difficulty", translatedDifficulty.toString());
     searchParams.set("length", length.toString());
     searchParams.set("operations", operations.join(","));
+    searchParams.set("withNegative", withNegative.toString());
     navigate(`/game?${searchParams.toString()}`);
   };
 
@@ -48,12 +47,14 @@ export default function Home() {
           difficulty={difficulty}
           length={length}
           operations={operations}
+          withNegative={withNegative}
           setDifficulty={(e) => {
             console.log("setDifficulty", e);
             setDifficulty(e);
           }}
           setLength={setLength}
           setOperations={setOperations}
+          setWithNegative={setWithNegative}
         />
       </div>
     </div>

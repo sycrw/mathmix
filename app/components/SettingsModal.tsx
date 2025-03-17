@@ -6,18 +6,22 @@ interface SettingsModalProps {
   difficulty: number;
   length: number;
   operations: Array<Operation>;
+  withNegative: boolean;
   setDifficulty: (difficulty: number) => void;
   setLength: (length: number) => void;
   setOperations: (operations: Array<Operation>) => void;
+  setWithNegative: (withNegative: boolean) => void;
 }
 
 export const SettingsModal = ({
   difficulty,
   length,
   operations,
+  withNegative,
   setDifficulty,
   setLength,
   setOperations,
+  setWithNegative,
 }: SettingsModalProps) => {
   return (
     <>
@@ -37,9 +41,11 @@ export const SettingsModal = ({
             difficulty={difficulty}
             length={length}
             operations={operations}
+            withNegative={withNegative}
             setDifficulty={setDifficulty}
             setLength={setLength}
             setOperations={setOperations}
+            setWithNegative={setWithNegative}
           />
 
           <div className="modal-action">
