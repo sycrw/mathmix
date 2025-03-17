@@ -12,7 +12,7 @@ export const HighscoreModal = () => {
     Operation.Multiply,
     Operation.Divide,
   ]);
-  const [difficulty, setDifficulty] = useState<number>(1);
+  const [difficulty, setDifficulty] = useState<number>(0);
   const [length, setLength] = useState<number>(15);
   const [highscore, setHighscore] = useState<number | undefined>(undefined);
   const [noHighscore, setNoHighscore] = useState<boolean>(false);

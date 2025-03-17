@@ -54,6 +54,7 @@ export default function Game() {
   }, []);
 
   function handleEndGame() {
+    console.log("end game");
     setHighScore(operations, difficulty, length, time);
 
     const searchParams = new URLSearchParams();

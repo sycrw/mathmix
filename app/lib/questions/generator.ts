@@ -19,17 +19,12 @@ export const generateMathQuestion = (
     if (operation == "divide") {
       //check that a whole number is the answer
       second =
-        (Math.floor(Math.random() * difficultyMultiplier) + 1) * Math.random() >
-        0.5
-          ? 1
-          : -1;
+        (Math.floor(Math.random() * difficultyMultiplier) + 1) *
+        (Math.random() > 0.5 ? 1 : -1);
       first =
         Math.floor(Math.random() * difficultyMultiplier) *
-          second *
-          Math.random() >
-        0.5
-          ? 1
-          : -1;
+        second *
+        (Math.random() > 0.5 ? 1 : -1);
       answer = first / second;
     } else {
       first =

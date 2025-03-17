@@ -5,6 +5,7 @@ export const getHighScore = (
   difficulty: number,
   amount: number
 ): number => {
+  console.log("getting highscore", operations, difficulty, amount);
   const key = `highscore_${operations.join("")}_${difficulty}_${amount}`;
   return Number(localStorage.getItem(key));
 };
@@ -18,7 +19,7 @@ export const setHighScore = (
   if (time === 0) return;
   console.log("time", time);
   console.log("highscore", getHighScore(operations, difficulty, amount));
-  if (time > getHighScore(operations, difficulty, amount)) {
+  if (time > (getHighScore(operations, difficulty, amount) || Infinity)) {
     return;
   }
   console.log(
