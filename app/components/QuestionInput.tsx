@@ -1,3 +1,4 @@
+import { ArrowTurnDownLeftIcon } from "@heroicons/react/24/solid";
 import type { Question } from "@/types/question";
 import { useState } from "react";
 
@@ -57,6 +58,15 @@ export const QuestionInput = ({ question, onCorrectAnswer }: QuestionProps) => {
           }
         }}
       />
+      {/*submit button */}
+      <button
+        onClick={() => {
+          onAnswer(Number(inputValue));
+        }}
+        className="btn btn-primary aspect-square "
+      >
+        <ArrowTurnDownLeftIcon className="w-4" />
+      </button>
     </div>
   );
 };
