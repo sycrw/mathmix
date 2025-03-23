@@ -30,10 +30,10 @@ export const generateMathQuestion = (
       answer = first / second;
     } else {
       first =
-        Math.floor(Math.random() * difficultyMultiplier) *
+        Math.floor(Math.random() * difficultyMultiplier + 1) *
         (!withNegative ? 1 : Math.random() > 0.5 ? 1 : -1);
       second =
-        Math.floor(Math.random() * difficultyMultiplier) *
+        Math.floor(Math.random() * difficultyMultiplier + 1) *
         (!withNegative ? 1 : Math.random() > 0.5 ? 1 : -1);
 
       switch (operation) {
