@@ -1,14 +1,9 @@
 import { ClockIcon, TrophyIcon } from "@heroicons/react/24/outline";
-import { use, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 
-import { Clock } from "../components/Clock";
 import type { Operation } from "@/types/operation";
-import { ProgressBar } from "../components/ProgressBar";
 import type { Question } from "@/types/question";
-import { QuestionInput } from "../components/QuestionInput";
 import type { Route } from "../+types/root";
-import { generateMathQuestion } from "../lib/questions/generator";
 import { getHighScore } from "@/lib/highscore";
 import { secondsToTime } from "@/lib/secondsToTime";
 
@@ -58,7 +53,13 @@ export default function Game() {
       <div className="flex justify-center gap-2">
         <button
           onClick={() => {
-            navigate("/");
+            const searchParams = new URLSearchParams();
+            searchParams.set("difficulty", difficulty.toString());
+            searchParams.set("length", length.toString());
+            searchParams.set("operations", operations.join(","));
+            searchParams.set("withNegative", withNegative.toString());
+            console.log("searchParams", searchParams);
+            navigate(`/?${searchParams.toString()}`);
           }}
           className="btn btn-primary mt-8"
         >
@@ -70,6 +71,7 @@ export default function Game() {
             searchParams.set("difficulty", difficulty.toString());
             searchParams.set("length", length.toString());
             searchParams.set("operations", operations.join(","));
+            searchParams.set("withNegative", withNegative.toString());
             navigate(`/game?${searchParams.toString()}`);
           }}
           className="btn btn-primary mt-8"

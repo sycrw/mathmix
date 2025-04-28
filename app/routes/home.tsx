@@ -1,8 +1,9 @@
+import { useNavigate, useSearchParams } from "react-router";
+
 import { HighscoreModal } from "@/components/HighscoreModal";
 import { Operation } from "@/types/operation";
 import type { Route } from "../+types/root";
 import { SettingsModal } from "@/components/SettingsModal";
-import { useNavigate } from "react-router";
 import { useState } from "react";
 
 export function meta({}: Route.MetaArgs) {
@@ -10,13 +11,22 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [difficulty, setDifficulty] = useState<number>(0);
-  const [length, setLength] = useState<number>(15);
-  const [operations, setOperations] = useState<Array<Operation>>([
-    Operation.Add,
-  ]);
-  const [withNegative, setWithNegative] = useState<boolean>(false);
+  const [difficulty, setDifficulty] = useState<number>(
+    Number(searchParams.get("difficulty")) || 0
+  );
+  const [length, setLength] = useState<number>(
+    Number(searchParams.get("length")) || 15
+  );
+  const [operations, setOperations] = useState<Array<Operation>>(
+    (searchParams.get("operations")?.split(",") || [
+      Operation.Add,
+    ]) as Operation[]
+  );
+  const [withNegative, setWithNegative] = useState<boolean>(
+    searchParams.get("withNegative") === "true"
+  );
 
   const startGame = () => {
     const searchParams = new URLSearchParams();

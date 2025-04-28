@@ -1,4 +1,8 @@
-import type { M } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
+import {
+  generateMatrixAddQuestion,
+  generateMatrixMultiplyQuestion,
+} from "./matrixGenerator";
+
 import type { Operation } from "@/types/operation";
 import type { Question } from "@/types/question";
 
@@ -28,6 +32,10 @@ export const generateMathQuestion = (
         second *
         (!withNegative ? 1 : Math.random() > 0.5 ? 1 : -1);
       answer = first / second;
+    } else if (operation == "matrixAdd") {
+      questions.push(generateMatrixAddQuestion(difficulty, withNegative));
+    } else if (operation == "matrixMultiply") {
+      questions.push(generateMatrixMultiplyQuestion(difficulty, withNegative));
     } else {
       first =
         Math.floor(Math.random() * difficultyMultiplier + 1) *
@@ -47,8 +55,13 @@ export const generateMathQuestion = (
           answer = first * second;
           break;
       }
+      questions.push({
+        first,
+        second,
+        operation,
+        answer,
+      });
     }
-    questions.push({ first, second, operation, answer });
   }
   return questions;
 };

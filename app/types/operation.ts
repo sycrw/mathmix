@@ -3,4 +3,6 @@ export enum Operation {
   Subtract = "subtract",
   Multiply = "multiply",
   Divide = "divide",
+  MatrixAdd = "matrixAdd",
+  MatrixMultiply = "matrixMultiply",
 }

@@ -22,12 +22,14 @@ export const OptionsSelect = ({
   setOperations,
   setWithNegative,
 }: OptionsSelectProps) => {
-  const POSSIBLE_LENGTHS = [15, 30, 60, 90];
+  const POSSIBLE_LENGTHS = [5, 10, 15, 30, 60, 90];
   const POSSIBLE_OPERATIONS = [
     Operation.Add,
     Operation.Subtract,
     Operation.Multiply,
     Operation.Divide,
+    Operation.MatrixAdd,
+    Operation.MatrixMultiply,
   ];
 
   return (
@@ -56,7 +58,7 @@ export const OptionsSelect = ({
       </div>
       <div>
         <h2 className="text-xl font-semibold mt-3">Amount</h2>
-        <div className="grid grid-cols-4 gap-2 mt-1">
+        <div className="grid grid-cols-6 gap-2 mt-1">
           {POSSIBLE_LENGTHS.map((l) => (
             <button
               key={l}
@@ -70,7 +72,7 @@ export const OptionsSelect = ({
       </div>
       <div>
         <h2 className="text-xl font-semibold mt-3">Operations</h2>
-        <div className="grid grid-cols-4 gap-2 mt-1">
+        <div className="grid grid-cols-3 gap-2 mt-1">
           {POSSIBLE_OPERATIONS.map((l) => (
             <button
               key={l}
