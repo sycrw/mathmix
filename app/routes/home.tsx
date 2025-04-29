@@ -14,7 +14,9 @@ export default function Home() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState<number>(
-    Number(searchParams.get("difficulty")) - 1 || 0
+    searchParams.get("difficulty")
+      ? Number(searchParams.get("difficulty")) - 1
+      : 0
   );
   const [length, setLength] = useState<number>(
     Number(searchParams.get("length")) || 15
