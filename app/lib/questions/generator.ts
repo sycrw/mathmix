@@ -32,6 +32,12 @@ export const generateMathQuestion = (
         second *
         (!withNegative ? 1 : Math.random() > 0.5 ? 1 : -1);
       answer = first / second;
+      questions.push({
+        first,
+        second,
+        operation,
+        answer,
+      });
     } else if (operation == "matrixAdd") {
       questions.push(generateMatrixAddQuestion(difficulty, withNegative));
     } else if (operation == "matrixMultiply") {
