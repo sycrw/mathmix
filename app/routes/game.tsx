@@ -60,7 +60,6 @@ export default function Game() {
   }, []);
 
   function handleEndGame() {
-    console.log("end game");
     setHighScore(operations, difficulty, length, withNegative, time);
 
     const searchParams = new URLSearchParams();
@@ -77,10 +76,10 @@ export default function Game() {
         <QuestionInput
           question={questions.at(currentQuestion)}
           onCorrectAnswer={() => {
-            setCurrentQuestion(currentQuestion + 1);
-            if (currentQuestion === questions.length - 1) {
+            if (currentQuestion + 1 === questions.length) {
               handleEndGame();
             }
+            setCurrentQuestion(currentQuestion + 1);
           }}
         />
         <Clock seconds={time} />

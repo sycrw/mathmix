@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import React, { useEffect, useState } from "react";
 
 import { ArrowTurnDownLeftIcon } from "@heroicons/react/24/outline";
 import type { Question } from "@/types/question";
@@ -17,9 +12,17 @@ export const MatrixQuestionInput = ({
   question,
   onCorrectAnswer,
 }: MatrixQuestionInputProps) => {
+  if (!question) {
+    return <div>No More Questions</div>;
+  }
   const [matrix, setMatrix] = useState<string[][]>(
     Array.from({ length: (question.answer as number[][]).length }, () =>
       Array((question.answer as number[][])[0].length).fill("")
+    )
+  );
+  const [showWrongMatrix, setShowWrongMatrix] = useState<boolean[][]>(
+    Array.from({ length: (question.answer as number[][]).length }, () =>
+      Array((question.answer as number[][])[0].length).fill(false)
     )
   );
 
@@ -32,9 +35,21 @@ export const MatrixQuestionInput = ({
   }, [question]);
 
   function onAnswer(answer: Array<Array<number>>) {
-    console.log("answer", answer);
-    console.log("question?.answer", question?.answer);
-    if (JSON.stringify(answer) === JSON.stringify(question?.answer)) {
+    let isCorrect = true;
+    var newWrongMatrix = Array.from(
+      { length: (question.answer as number[][]).length },
+      () => Array((question.answer as number[][])[0].length).fill(false)
+    );
+    for (let i = 0; i < answer.length; i++) {
+      for (let j = 0; j < answer[i].length; j++) {
+        if (answer[i][j] !== (question.answer as number[][])[i][j]) {
+          isCorrect = false;
+          newWrongMatrix[i][j] = true;
+        }
+      }
+    }
+    setShowWrongMatrix(newWrongMatrix);
+    if (isCorrect) {
       onCorrectAnswer(answer);
     }
   }
@@ -56,7 +71,24 @@ export const MatrixQuestionInput = ({
       <p className="text-4xl font-bold">=</p>
       <MatrixAnswer
         matrix={matrix}
-        onChange={setMatrix}
+        onChange={(newMatrix) => {
+          // remove wrong once new value is entered
+          setShowWrongMatrix((wrongMatrix) =>
+            wrongMatrix.map((row, rowIndex) =>
+              row.map((cell, colIndex) => {
+                if (
+                  cell &&
+                  matrix[rowIndex][colIndex] !== newMatrix[rowIndex][colIndex]
+                ) {
+                  return false;
+                }
+                return cell;
+              })
+            )
+          );
+          setMatrix(newMatrix);
+        }}
+        wrongMatrix={showWrongMatrix}
         handleSubmit={() =>
           onAnswer(matrix.map((row) => row.map((cell) => Number(cell))))
         }
@@ -113,16 +145,18 @@ const MatrixAnswer = ({
   matrix,
   onChange,
   handleSubmit,
+  wrongMatrix,
 }: {
   matrix: string[][];
-  onChange: Dispatch<SetStateAction<string[][]>>;
+  onChange: (matrix: string[][]) => void;
   handleSubmit: () => void;
+  wrongMatrix: boolean[][];
 }) => {
   const handleChange = (rowIndex: number, colIndex: number, value: string) => {
     const newMatrix = matrix.map((r, i) =>
       r.map((c, j) => (i === rowIndex && j === colIndex ? value : c))
     );
-    console.log("newMatrix", newMatrix);
+
     onChange(newMatrix);
   };
 
@@ -154,7 +188,10 @@ const MatrixAnswer = ({
                       onChange={(e) =>
                         handleChange(rowIndex, colIndex, e.target.value)
                       }
-                      className="w-10 text-center border border-gray-300 rounded"
+                      className={`w-10 aspect-square text-center border border-gray-300 rounded focus:outline-none ${
+                        wrongMatrix[rowIndex][colIndex] &&
+                        "input-error bg-red-300"
+                      } `}
                     />
                   </td>
                 ))}

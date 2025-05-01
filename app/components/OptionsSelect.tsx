@@ -11,7 +11,6 @@ interface OptionsSelectProps {
   setOperations: (operations: Array<Operation>) => void;
   setWithNegative: (withNegative: boolean) => void;
 }
-
 export const OptionsSelect = ({
   difficulty,
   length,

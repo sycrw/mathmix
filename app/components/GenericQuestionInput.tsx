@@ -12,6 +12,7 @@ export const GenericQuestionInput = ({
   onCorrectAnswer,
 }: QuestionProps) => {
   const [inputValue, setInputValue] = useState<string>("");
+  const [showWrong, setShowWrong] = useState<boolean>(false);
 
   const operationSymbol = (() => {
     switch (question.operation) {
@@ -33,6 +34,8 @@ export const GenericQuestionInput = ({
     if (answer === question.answer) {
       setInputValue("");
       onCorrectAnswer(answer);
+    } else {
+      setShowWrong(true);
     }
   };
 
@@ -49,9 +52,12 @@ export const GenericQuestionInput = ({
       </div>
 
       <input
-        className="input aspect-square"
+        className={`input aspect-square focus:outline-none  ${
+          showWrong ? "input-error bg-red-300" : ""
+        }`}
         value={inputValue}
         onChange={(e) => {
+          setShowWrong(false);
           setInputValue(e.target.value);
         }}
         onKeyDown={(e) => {

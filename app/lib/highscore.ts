@@ -6,7 +6,6 @@ export const getHighScore = (
   amount: number,
   withNegative: boolean
 ): number => {
-  console.log("getting highscore", operations, difficulty, amount);
   const key = `highscore_${operations.join(
     ""
   )}_${difficulty}_${amount}_${withNegative}`;

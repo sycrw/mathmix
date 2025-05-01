@@ -10,7 +10,6 @@ interface QuestionProps {
 }
 
 export const QuestionInput = ({ question, onCorrectAnswer }: QuestionProps) => {
-  const [inputValue, setInputValue] = useState<string>("");
   if (!question) {
     return <div>No More Questions</div>;
   }

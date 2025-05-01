@@ -58,7 +58,6 @@ export default function Game() {
             searchParams.set("length", length.toString());
             searchParams.set("operations", operations.join(","));
             searchParams.set("withNegative", withNegative.toString());
-            console.log("searchParams", searchParams);
             navigate(`/?${searchParams.toString()}`);
           }}
           className="btn btn-primary mt-8"

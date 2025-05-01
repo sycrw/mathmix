@@ -14,9 +14,9 @@ export default function Home() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState<number>(
-    searchParams.get("difficulty")
-      ? Number(searchParams.get("difficulty")) - 1
-      : 0
+    searchParams.get("difficulty") === null
+      ? 0
+      : (Number(searchParams.get("difficulty")) - 1) * 25
   );
   const [length, setLength] = useState<number>(
     Number(searchParams.get("length")) || 15
@@ -61,7 +61,6 @@ export default function Home() {
           operations={operations}
           withNegative={withNegative}
           setDifficulty={(e) => {
-            console.log("setDifficulty", e);
             setDifficulty(e);
           }}
           setLength={setLength}
