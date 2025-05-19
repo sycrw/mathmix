@@ -189,8 +189,9 @@ const MatrixAnswer = ({
                         handleChange(rowIndex, colIndex, e.target.value)
                       }
                       className={`w-10 aspect-square text-center border border-gray-300 rounded focus:outline-none ${
-                        wrongMatrix[rowIndex][colIndex] &&
-                        "input-error bg-red-300"
+                        (wrongMatrix
+                          ? wrongMatrix[rowIndex][colIndex]
+                          : false) && "input-error bg-red-300"
                       } `}
                     />
                   </td>

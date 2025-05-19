@@ -3,7 +3,7 @@ import {
   generateMatrixMultiplyQuestion,
 } from "./matrixGenerator";
 
-import type { Operation } from "@/types/operation";
+import { Operation } from "@/types/operation";
 import type { Question } from "@/types/question";
 
 export const generateMathQuestion = (
